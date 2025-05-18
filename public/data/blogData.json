@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "Getting Started with Next.js",
+    "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop&q=60",
+    "excerpt": "Next.js has revolutionized React development. This guide explores key features like server-side rendering, static generation, and best practices for building modern web apps.",
+    "content": "Next.js has revolutionized the way we build React applications. In this comprehensive guide, we'll explore the core concepts and features that make Next.js a powerful framework for modern web development.\n\n## Why Next.js?\n\nNext.js provides an excellent developer experience with features like:\n- Server-side rendering\n- Static site generation\n- API routes\n- File-based routing\n- Built-in CSS support\n\n## Getting Started\n\nTo create a new Next.js project, run:\n```bash\nnpx create-next-app@latest my-app\n```\n\n## Key Features\n\n1. **Server-Side Rendering**\n   Next.js enables server-side rendering out of the box, improving performance and SEO.\n\n2. **Static Site Generation**\n   Generate static pages at build time for even better performance.\n\n3. **API Routes**\n   Create API endpoints as part of your Next.js application.\n\n## Best Practices\n\n- Use the App Router for new projects\n- Implement proper error handling\n- Optimize images using next/image\n- Leverage TypeScript for better type safety"
+  },
+  {
+    "id": 2,
+    "title": "Mastering TypeScript in 2024",
+    "image": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&auto=format&fit=crop&q=60",
+    "excerpt": "TypeScript is now essential for scalable JavaScript development. This post covers its benefits, advanced features like generics, and best practices to master it in 2024.",
+    "content": "TypeScript has become an essential tool in modern web development. Let's explore how to leverage its features effectively.\n\n## Why TypeScript?\n\nTypeScript adds static typing to JavaScript, providing:\n- Better code completion\n- Catch errors early\n- Improved maintainability\n- Better documentation\n\n## Advanced Features\n\n1. **Generics**\n   Create reusable components with type safety.\n\n2. **Type Inference**\n   Let TypeScript automatically determine types.\n\n3. **Utility Types**\n   Use built-in utility types for common operations.\n\n## Best Practices\n\n- Use strict mode\n- Leverage type inference\n- Create custom type definitions\n- Use interfaces for object shapes"
+  },
+  {
+    "id": 3,
+    "title": "The Future of AI in Web Development",
+    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=60",
+    "excerpt": "AI is transforming web development—from code generation to smart debugging and performance optimization. Here's what to expect as AI continues to shape the future of tech.",
+    "content": "Artificial Intelligence is transforming web development in unprecedented ways. Let's explore the current trends and future possibilities.\n\n## AI in Web Development\n\nAI is revolutionizing web development through:\n- Automated code generation\n- Smart debugging\n- Performance optimization\n- User experience enhancement\n\n## Current Applications\n\n1. **Code Generation**\n   AI tools can generate code based on natural language descriptions.\n\n2. **Testing Automation**\n   AI-powered testing tools can identify potential issues.\n\n3. **Performance Optimization**\n   AI algorithms can optimize website performance automatically.\n\n## Future Trends\n\n- More sophisticated code generation\n- Enhanced security through AI\n- Improved user experience personalization\n- Automated maintenance and updates"
+  }
+]

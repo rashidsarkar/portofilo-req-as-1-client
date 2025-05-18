@@ -231,9 +231,6 @@ export default function About() {
                       whileHover={{ scale: 1.05 }}
                       className="flex items-center gap-2 p-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-primary/10 to-blue-600/10 flex items-center justify-center">
-                        {getSkillIcon(skill)}
-                      </div>
                       <span className="text-sm font-medium">{skill}</span>
                     </motion.div>
                   ))}

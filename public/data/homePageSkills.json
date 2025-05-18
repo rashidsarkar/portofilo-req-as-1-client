@@ -1,0 +1,61 @@
+{
+  "skillCategories": [
+    {
+      "id": "f1e8e5e3-74a0-47b8-a68f-9e882d997933",
+      "title": "Frontend Development",
+      "description": "Building modern and responsive user interfaces",
+      "color": "text-blue-500",
+      "bgColor": "bg-blue-100",
+      "skills": [
+        { "id": "e4d1cf70-91f2-4060-bf6f-0805f99c7d83", "name": "React" },
+        { "id": "cf4cfc3a-fccd-4f21-b5c2-149af0f88f3d", "name": "Next.js" },
+        { "id": "7990f530-2905-4b68-b6cc-69e4a2d9a46a", "name": "TypeScript" },
+        { "id": "34f82d76-2b29-4433-abe3-3031f8f31e94", "name": "Tailwind CSS" },
+        { "id": "104fd679-01a3-4748-9a39-1e320867c0bc", "name": "Redux" }
+      ]
+    },
+    {
+      "id": "c38a9d6c-5f1c-4b39-a2ea-d22b3e0e8d59",
+      "title": "Backend Development",
+      "description": "Creating robust and scalable server-side applications",
+      "color": "text-green-500",
+      "bgColor": "bg-green-100",
+      "skills": [
+        { "id": "de1c3275-c4a4-4dbf-9a63-bd4cb278b73f", "name": "Node.js" },
+        { "id": "12720c41-914b-4a90-bc28-b14472a25710", "name": "Express" },
+        { "id": "d621c7bb-59fc-439e-bf87-0c23b28e55b8", "name": "MongoDB" },
+        { "id": "153c688b-4bc1-420f-9186-6a99b060f9b6", "name": "PostgreSQL" },
+        { "id": "9e646bd1-2b32-43aa-bc5f-195f6b6d3b6a", "name": "Prisma" },
+        { "id": "49d1ae2d-776e-442f-a908-2d3967a20f4c", "name": "GraphQL" }
+      ]
+    },
+    {
+      "id": "a22cb4ae-bfae-48a1-b4fc-bec23660e872",
+      "title": "Database & Storage",
+      "description": "Expertise in database management and data storage solutions",
+      "color": "text-emerald-500",
+      "bgColor": "bg-emerald-100",
+      "skills": [
+        { "id": "d6f2aef1-9d19-4a46-9027-0c75c4f3a993", "name": "MongoDB" },
+        { "id": "ebc9ae2f-1c43-48db-a61e-67eacfd32fc6", "name": "PostgreSQL" },
+        { "id": "0cf9bc0e-8c28-4b06-b13f-5cc43e13994c", "name": "Mongoose" },
+        { "id": "b6d5dd98-00a4-487b-b36a-ec5f5663d1fa", "name": "Prisma" }
+      ]
+    },
+    {
+      "id": "fc949183-93e0-4cf3-aed4-597b0b15d2a6",
+      "title": "Tools & Technologies",
+      "description": "Essential tools and technologies for development",
+      "color": "text-purple-500",
+      "bgColor": "bg-purple-100",
+      "skills": [
+        { "id": "5ab78f2e-2924-4e8f-a90e-89cb205b6bc5", "name": "JavaScript" },
+        { "id": "dbbd3e7c-e823-4a64-9dbf-146d85875a3c", "name": "TypeScript" },
+        { "id": "fd0c78c4-f1eb-47ff-88ef-0cb2d5a99912", "name": "Git" },
+        { "id": "f81a27a6-79e8-4685-bcf4-e06a0c832b74", "name": "GitHub" },
+        { "id": "9dd908ce-b67b-47ed-b43d-6fd45172e56b", "name": "REST APIs" },
+        { "id": "2bbdc002-7f63-4be0-bfc7-9826cb70ee5c", "name": "Dockerr" }
+      ]
+    }
+  ]
+} 

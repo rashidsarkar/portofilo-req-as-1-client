@@ -2,9 +2,33 @@
 
 import Link from 'next/link';
 import { Button } from '../../components/ui/button';
-import { blogPosts, BlogPost } from '@/data/blog';
+import { useEffect, useState } from 'react';
+
+interface BlogPost {
+  id: number;
+  title: string;
+  image: string;
+  excerpt: string;
+  content: string;
+}
 
 export default function Blog() {
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+
+  useEffect(() => {
+    const fetchBlogPosts = async () => {
+      try {
+        const response = await fetch('/data/blogData.json');
+        const data = await response.json();
+        setBlogPosts(data); // The JSON is already an array, no need for .posts
+      } catch (error) {
+        console.error('Error fetching blog posts:', error);
+      }
+    };
+
+    fetchBlogPosts();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       <div className="container mx-auto px-4 py-16">
@@ -33,15 +57,6 @@ export default function Blog() {
                   alt={post.title}
                   className="w-full h-full object-cover"
                 />
-                <div 
-                  data-aos="zoom-in"
-                  data-aos-delay={200 + index * 100}
-                  className="absolute top-4 left-4"
-                >
-                  <span className="px-3 py-1 text-sm font-medium text-white bg-primary/80 rounded-full">
-                    {post.category}
-                  </span>
-                </div>
               </div>
               
               <div className="p-6">
@@ -54,22 +69,7 @@ export default function Blog() {
                   </Link>
                 </h2>
                 <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
-                
-                <div className="flex justify-between items-center text-sm text-gray-500 mb-4">
-                  <span className="flex items-center">
-                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    {post.date}
-                  </span>
-                  <span className="flex items-center">
-                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    {post.readTime}
-                  </span>
-                </div>
-                
+              
                 <Link href={`/blog/${post.id}`}>
                   <Button className="w-full bg-primary hover:bg-primary/90 text-black transition-colors">
                     Read More →

@@ -3,7 +3,7 @@
     "name": "Rashid Sarkar",
     "role": "Full Stack Developer",
     "bio": "I am a passionate Full Stack Developer with expertise in modern web technologies. I love creating beautiful and functional web applications that solve real-world problems.",
-    "experience": "2+ years",
+    "experience": "3+ years",
     "location": "Dhaka, Bangladesh",
     "email": "rashidsarkar.dev@gmail.com",
     "skills": [
@@ -32,7 +32,7 @@
   "projects": [
     {
       "id": "1",
-      "title": "Luxe Modern Living",
+      "title": "Luxe Modern Living.",
       "image": "/assets/project-images.png",
       "overview": "A modern living platform built with MERN stack, featuring user authentication, property listings, and interactive features.",
       "technologies": {
