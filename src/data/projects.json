@@ -1,0 +1,112 @@
+{
+  "about": {
+    "name": "Rashid Sarkar",
+    "role": "Full Stack Developer",
+    "bio": "I am a passionate Full Stack Developer with expertise in modern web technologies. I love creating beautiful and functional web applications that solve real-world problems.",
+    "experience": "2+ years",
+    "location": "Dhaka, Bangladesh",
+    "email": "rashidsarkar.dev@gmail.com",
+    "skills": [
+      {
+        "category": "Frontend",
+        "items": ["React.js", "Next.js", "TypeScript", "Tailwind CSS", "Redux"]
+      },
+      {
+        "category": "Backend",
+        "items": ["Node.js", "Express.js", "MongoDB", "Firebase", "REST APIs"]
+      },
+      {
+        "category": "Tools & Others",
+        "items": ["Git", "VS Code", "Figma", "Postman", "Docker"]
+      }
+    ],
+    "education": [
+      {
+        "degree": "B.Sc in Computer Science",
+        "institution": "University of Dhaka",
+        "year": "2020-2024"
+      }
+    ],
+    "interests": ["Web Development", "UI/UX Design", "Problem Solving", "Open Source"]
+  },
+  "projects": [
+    {
+      "id": "1",
+      "title": "Luxe Modern Living",
+      "image": "/assets/project-images.png",
+      "overview": "A modern living platform built with MERN stack, featuring user authentication, property listings, and interactive features.",
+      "technologies": {
+        "frontend": ["React.js", "Tailwind CSS", "Next.js"],
+        "backend": ["Node.js", "Express.js"],
+        "database": "MongoDB"
+      },
+      "links": {
+        "liveDemo": "https://stellar-malasada-952ea2.netlify.app/",
+        "clientRepo": "https://github.com/rashidsarkar/Luxe---Modern-Living-Platform---a12-p2.git",
+        "serverRepo": "https://github.com/rashidsarkar/Luxe---Modern-Living-Platform---a12-p2.git"
+      },
+      "features": [
+        {
+          "icon": "Users",
+          "label": "User Authentication & Authorization",
+          "gradient": "from-pink-500 to-rose-500"
+        },
+        {
+          "icon": "Shield",
+          "label": "Secure Login System",
+          "gradient": "from-emerald-500 to-green-500"
+        },
+        {
+          "icon": "Image",
+          "label": "Property Listings with Images",
+          "gradient": "from-cyan-500 to-blue-500"
+        },
+        {
+          "icon": "Database",
+          "label": "Data Management",
+          "gradient": "from-amber-500 to-orange-500"
+        }
+      ],
+      "loginCredentials": {
+        "email": "demo@example.com",
+        "password": "demo123"
+      },
+      "featured": true,
+      "createdAt": "2024-01-15"
+    },
+    {
+      "id": "2",
+      "title": "Task Management App",
+      "image": "/assets/project-images.png",
+      "overview": "A collaborative task management application with real-time updates",
+      "technologies": {
+        "frontend": ["React", "Material-UI"],
+        "backend": ["Firebase"],
+        "database": "Firebase"
+      },
+      "links": {
+        "liveDemo": "https://task-manager-demo.com",
+        "clientRepo": "https://github.com/username/task-manager",
+        "serverRepo": "https://github.com/username/task-manager"
+      },
+      "features": [
+        {
+          "icon": "Users",
+          "label": "Real-time Collaboration",
+          "gradient": "from-pink-500 to-rose-500"
+        },
+        {
+          "icon": "Shield",
+          "label": "Secure Authentication",
+          "gradient": "from-emerald-500 to-green-500"
+        }
+      ],
+      "loginCredentials": {
+        "email": "demo@example.com",
+        "password": "demo123"
+      },
+      "featured": true,
+      "createdAt": "2024-02-01"
+    }
+  ]
+} 

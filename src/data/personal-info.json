@@ -1,0 +1,14 @@
+{
+  "name": "John Doe",
+  "title": "Full Stack Developer",
+  "email": "john.doe@example.com",
+  "location": "New York, USA",
+  "bio": "Passionate full-stack developer with expertise in modern web technologies. I love building scalable applications and solving complex problems.",
+  "avatar": "/images/avatar.jpg",
+  "socialLinks": {
+    "github": "https://github.com/johndoe",
+    "linkedin": "https://linkedin.com/in/johndoe",
+    "twitter": "https://twitter.com/johndoe",
+    "portfolio": "https://johndoe.dev"
+  }
+} 

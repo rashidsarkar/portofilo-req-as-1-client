@@ -1,0 +1,62 @@
+{
+  "skillCategories": [
+    {
+      "title": "Frontend Development",
+      "description": "Building modern and responsive user interfaces",
+      "icon": "BiCodeAlt",
+      "color": "text-blue-500",
+      "bgColor": "bg-blue-100",
+      "skills": [
+        { "name": "React", "icon": "FaReact", "color": "text-blue-500" },
+        { "name": "Next.js", "icon": "SiNextdotjs", "color": "text-black" },
+        { "name": "TypeScript", "icon": "SiTypescript", "color": "text-blue-600" },
+        { "name": "Tailwind CSS", "icon": "SiTailwindcss", "color": "text-cyan-500" },
+        { "name": "Redux", "icon": "SiRedux", "color": "text-purple-500" }
+      ]
+    },
+    {
+      "title": "Backend Development",
+      "description": "Creating robust and scalable server-side applications",
+      "icon": "BiServer",
+      "color": "text-green-500",
+      "bgColor": "bg-green-100",
+      "skills": [
+        { "name": "Node.js", "icon": "FaNodeJs", "color": "text-green-600" },
+        { "name": "Express", "icon": "SiExpress", "color": "text-black" },
+        { "name": "MongoDB", "icon": "SiMongodb", "color": "text-green-700" },
+        { "name": "PostgreSQL", "icon": "SiPostgresql", "color": "text-blue-700" },
+        { "name": "Prisma", "icon": "SiPrisma", "color": "text-blue-900" },
+        { "name": "GraphQL", "icon": "SiGraphql", "color": "text-pink-600" }
+      ]
+    },
+    {
+      "title": "Database & Storage",
+      "description": "Expertise in database management and data storage solutions",
+      "icon": "FaDatabase",
+      "color": "text-emerald-500",
+      "bgColor": "bg-emerald-100",
+      "skills": [
+        { "name": "MongoDB", "icon": "SiMongodb", "color": "text-green-700" },
+        { "name": "PostgreSQL", "icon": "SiPostgresql", "color": "text-blue-700" },
+        { "name": "Mongoose", "icon": "SiMongodb", "color": "text-green-600" },
+        { "name": "Prisma", "icon": "SiPrisma", "color": "text-blue-900" }
+      ]
+    },
+    {
+      "title": "Tools & Technologies",
+      "description": "Essential tools and technologies for development",
+      "icon": "FiCpu",
+      "color": "text-purple-500",
+      "bgColor": "bg-purple-100",
+      "skills": [
+        { "name": "JavaScript", "icon": "SiJavascript", "color": "text-yellow-500" },
+        { "name": "TypeScript", "icon": "SiTypescript", "color": "text-blue-600" },
+        { "name": "Git", "icon": "FaGitAlt", "color": "text-orange-600" },
+        { "name": "GitHub", "icon": "FaGithub", "color": "text-black" },
+        { "name": "REST APIs", "icon": "TbApi", "color": "text-green-600" },
+        { "name": "Docker", "icon": "FaDocker", "color": "text-blue-400" }
+      ]
+    }
+  ]
+}
+  
