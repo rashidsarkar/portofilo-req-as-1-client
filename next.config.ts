@@ -4,7 +4,8 @@ const nextConfig: NextConfig = {
   images: {
     domains: [
       "fabulous-meringue-442652.netlify.app",
-      "i.ibb.co"
+      "i.ibb.co",
+      
     ]
   }
 };

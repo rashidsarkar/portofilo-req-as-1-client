@@ -1,23 +1,49 @@
 "use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { Button } from './ui/button';
-import { ArrowRight, Info } from 'lucide-react';
-import projectsData from '@/data/projects.json';
-import { motion } from 'framer-motion';
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "./ui/button";
+import { ArrowRight, Info } from "lucide-react";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+
+interface Project {
+  id: string;
+  title: string;
+  overview: string;
+  image: string;
+  frontendTech: string[];
+  backendTech: string[];
+  databaseTech: string;
+  
+  liveDemoLink: string;
+}
 
 export default function Projects() {
-  const { projects } = projectsData;
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/api/project');
+        const data = await response.json();
+        setProjects(data.data);
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
-      }
-    }
+        staggerChildren: 0.2,
+      },
+    },
   };
 
   const itemVariants = {
@@ -27,59 +53,62 @@ export default function Projects() {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
-      }
-    }
+        ease: "easeOut",
+      },
+    },
   };
 
   return (
-    <section className="py-16 bg-white rounded-2xl shadow-sm">
-      <div className="container mx-auto px-4">
-        <motion.div 
+    <section className="py-16 bg-white shadow-sm rounded-2xl">
+      <div className="container px-4 mx-auto">
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="mb-12 text-center"
         >
-          <h2 className="text-4xl font-bold mb-4 ">
-            Featured Projects
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Explore some of my recent work and personal projects that showcase my skills and expertise.
+          <h2 className="mb-4 text-4xl font-bold ">Featured Projects</h2>
+          <p className="max-w-2xl mx-auto text-gray-600">
+            Explore some of my recent work and personal projects that showcase
+            my skills and expertise.
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
         >
-          {projects.map((project) => (
+          {projects?.map((project) => (
             <motion.div
               key={project.id}
               variants={itemVariants}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+              className="overflow-hidden transition-shadow bg-white rounded-lg shadow-md hover:shadow-xl"
             >
-              <Image
+              <img
                 src={project.image}
                 alt={project.title}
                 width={400}
                 height={300}
-                className="w-full h-48 object-cover"
+                className="object-cover w-full h-48"
               />
               <div className="p-6">
-                <h2 className="text-xl font-semibold mb-2">{project.title}</h2>
-                <p className="text-gray-600 mb-4">{project.overview}</p>
+                <h2 className="mb-2 text-xl font-semibold">{project.title}</h2>
+                <p className="mb-4 text-gray-600">{project.overview}</p>
 
                 <div className="mb-4">
-                  <h3 className="font-medium mb-2">Technologies Used:</h3>
+                  <h3 className="mb-2 font-medium">Technologies Used:</h3>
                   <div className="flex flex-wrap gap-2">
-                    {[...project.technologies.frontend, ...project.technologies.backend, project.technologies.database].map((tech) => (
+                    {[
+                      ...project.frontendTech,
+                      ...project.backendTech,
+                      project.databaseTech,
+                    ].map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 bg-gray-100 rounded-full text-sm"
+                        className="px-3 py-1 text-sm bg-gray-100 rounded-full"
                       >
                         {tech}
                       </span>
@@ -87,19 +116,17 @@ export default function Projects() {
                   </div>
                 </div>
 
-                <div className="flex justify-between items-center flex-wrap gap-3">
-                  <span className="text-sm text-gray-500">
-                    {project.createdAt}
-                  </span>
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  
                   <div className="flex gap-3">
-                    {project.links.liveDemo && (
+                    {project.liveDemoLink && (
                       <motion.a
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        href={project.links.liveDemo}
+                        href={project.liveDemoLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 border border-primary text-primary hover:bg-primary/10 px-4 py-2 rounded-lg transition-colors text-sm"
+                        className="inline-flex items-center gap-2 px-4 py-2 text-sm transition-colors border rounded-lg border-primary text-primary hover:bg-primary/10"
                       >
                         Live Link
                         <ArrowRight className="w-4 h-4" />
@@ -110,9 +137,7 @@ export default function Projects() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <Button
-                          className="border border-primary text-primary hover:bg-primary/10 text-sm inline-flex items-center gap-2"
-                        >
+                        <Button className="inline-flex items-center gap-2 text-sm border border-primary text-primary hover:bg-primary/10">
                           View Details
                           <Info className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                         </Button>
@@ -125,22 +150,22 @@ export default function Projects() {
           ))}
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-center mt-12"
+          className="mt-12 text-center"
         >
-          <div className="w-full flex justify-center">
+          <div className="flex justify-center w-full">
             <Link href="/projects" className="group">
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button className="bg-primary hover:bg-primary-hover text-black font-semibold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 max-w-fit">
+                <Button className="flex items-center gap-2 px-6 py-3 font-semibold text-black transition-all duration-300 rounded-lg shadow-lg bg-primary hover:bg-primary-hover hover:shadow-xl max-w-fit">
                   View All
-                  <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-5 h-5 transition-transform transform group-hover:translate-x-1" />
                 </Button>
               </motion.div>
             </Link>

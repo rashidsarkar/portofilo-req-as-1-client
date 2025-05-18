@@ -3,13 +3,51 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ExternalLink, Github, ArrowLeft, Code2, Database, Server, Users, Shield, Image as ImageIcon } from 'lucide-react';
-import projectsData from '@/data/projects.json';
+import { ExternalLink, ArrowLeft, Code2, Database, Server, Github } from 'lucide-react';
 import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
+interface Project {
+  id: string;
+  title: string;
+  overview: string;
+  image: string;
+  frontendTech: string[];
+  backendTech: string[];
+  databaseTech: string;
+  liveDemoLink: string;
+  clientRepoLink: string;
+  serverRepoLink: string;
+}
 
 export default function ProjectDetails() {
   const params = useParams();
-  const project = projectsData.projects.find(p => p.id === params.id);
+  const [project, setProject] = useState<Project | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        const response = await fetch(`http://localhost:4000/api/project/${params.id}`);
+        const data = await response.json();
+        setProject(data.data);
+      } catch (error) {
+        console.error('Error fetching project:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProject();
+  }, [params.id]);
+console.log(project);
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 py-16">
+        <div className="text-center">Loading...</div>
+      </div>
+    );
+  }
 
   if (!project) {
     return (
@@ -33,11 +71,10 @@ export default function ProjectDetails() {
 
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="relative h-[400px]">
-          <Image
+          <img
             src={project.image}
             alt={project.title}
-            fill
-            className="object-cover"
+            className="object-cover w-full h-full"
           />
         </div>
 
@@ -57,21 +94,21 @@ export default function ProjectDetails() {
                     <Code2 className="w-5 h-5 text-white" />
                   </div>
                   <span className="font-medium">Frontend Technologies:</span>
-                  <span className="text-gray-600">{project.technologies.frontend.join(', ')}</span>
+                  <span className="text-gray-600">{project.frontendTech.join(', ')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="p-2 rounded-lg bg-gradient-to-r from-green-500 to-teal-500">
                     <Server className="w-5 h-5 text-white" />
                   </div>
                   <span className="font-medium">Backend Technologies:</span>
-                  <span className="text-gray-600">{project.technologies.backend.join(', ')}</span>
+                  <span className="text-gray-600">{project.backendTech.join(', ')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="p-2 rounded-lg bg-gradient-to-r from-yellow-500 to-orange-500">
                     <Database className="w-5 h-5 text-white" />
                   </div>
                   <span className="font-medium">Database:</span>
-                  <span className="text-gray-600">{project.technologies.database}</span>
+                  <span className="text-gray-600">{project.databaseTech}</span>
                 </div>
               </div>
             </div>
@@ -79,8 +116,9 @@ export default function ProjectDetails() {
             <div>
               <h2 className="text-2xl font-semibold mb-4">Project Links</h2>
               <div className="space-y-4">
+              <div className="space-y-4">
                 <a
-                  href={project.links.liveDemo}
+                  href={project.liveDemoLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-primary hover:underline group"
@@ -91,7 +129,7 @@ export default function ProjectDetails() {
                   <span>Live Demo</span>
                 </a>
                 <a
-                  href={project.links.clientRepo}
+                  href={project.clientRepoLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-primary hover:underline group"
@@ -102,7 +140,7 @@ export default function ProjectDetails() {
                   <span>Client Repository</span>
                 </a>
                 <a
-                  href={project.links.serverRepo}
+                  href={project.serverRepoLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-primary hover:underline group"
@@ -113,31 +151,7 @@ export default function ProjectDetails() {
                   <span>Server Repository</span>
                 </a>
               </div>
-            </div>
-          </div>
-
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">Features</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {project.features.map((feature, index) => (
-                <div key={index} className="flex items-center gap-2">
-                  <div className={`p-2 rounded-lg bg-gradient-to-r ${feature.gradient}`}>
-                    {feature.icon === 'Users' && <Users className="w-5 h-5 text-white" />}
-                    {feature.icon === 'Shield' && <Shield className="w-5 h-5 text-white" />}
-                    {feature.icon === 'Image' && <ImageIcon className="w-5 h-5 text-white" />}
-                    {feature.icon === 'Database' && <Database className="w-5 h-5 text-white" />}
-                  </div>
-                  <span>{feature.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">Login Credentials</h2>
-            <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-4 rounded-lg border border-gray-200">
-              <p className="mb-2"><span className="font-medium">Email:</span> {project.loginCredentials.email}</p>
-              <p><span className="font-medium">Password:</span> {project.loginCredentials.password}</p>
+              </div>
             </div>
           </div>
         </div>

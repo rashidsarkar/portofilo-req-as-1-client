@@ -4,17 +4,41 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Info } from 'lucide-react';
-import projectsData from "@/data/projects.json";
-import { Project } from "@/lib/types";
+import { useEffect, useState } from 'react';
+
+interface Project {
+  id: string;
+  title: string;
+  overview: string;
+  image: string;
+  frontendTech: string[];
+  backendTech: string[];
+  databaseTech: string;
+  liveDemoLink: string;
+}
 
 export default function ProjectsPage() {
-  const { projects } = projectsData;
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/api/project');
+        const data = await response.json();
+        setProjects(data.data);
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   return (
     <div className="min-h-screen py-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4 ">
+          <h1 className="text-4xl font-bold mb-4">
             My Projects
           </h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
@@ -23,18 +47,16 @@ export default function ProjectsPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project: Project) => (
+          {projects?.map((project) => (
             <div
               key={project.id}
               className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
-              data-aos="fade-up"
             >
               <div className="relative h-48 w-full">
-                <Image
+                <img
                   src={project.image}
                   alt={project.title}
-                  fill
-                  className="object-cover"
+                  className="object-cover w-full h-full"
                 />
               </div>
               <div className="p-6">
@@ -44,7 +66,11 @@ export default function ProjectsPage() {
                 <div className="mb-4">
                   <h3 className="font-medium mb-2">Technologies Used:</h3>
                   <div className="flex flex-wrap gap-2">
-                    {project.technologies.frontend.map((tech, index) => (
+                    {[
+                      ...project.frontendTech,
+                      ...project.backendTech,
+                      project.databaseTech
+                    ].map((tech, index) => (
                       <span
                         key={`${tech}-${index}`}
                         className="px-3 py-1 bg-gray-100 rounded-full text-sm"
@@ -56,19 +82,18 @@ export default function ProjectsPage() {
                 </div>
 
                 <div className="flex justify-between items-center flex-wrap gap-3">
-                  <span className="text-sm text-gray-500">
-                    {new Date(project.createdAt).toLocaleDateString()}
-                  </span>
                   <div className="flex gap-3">
-                    <a
-                      href={project.links.liveDemo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 border border-primary text-primary hover:bg-primary/10 px-4 py-2 rounded-lg transition-colors text-sm"
-                    >
-                      Live Link
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
+                    {project.liveDemoLink && (
+                      <a
+                        href={project.liveDemoLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 border border-primary text-primary hover:bg-primary/10 px-4 py-2 rounded-lg transition-colors text-sm"
+                      >
+                        Live Link
+                        <ArrowRight className="w-4 h-4" />
+                      </a>
+                    )}
                     <Link href={`/projects/${project.id}`}>
                       <Button className="border border-primary text-primary hover:bg-primary/10 text-sm inline-flex items-center gap-2">
                         View Details
