@@ -10,10 +10,44 @@ import {
 import projectsData from '@/data/projects.json';
 import Image from 'next/image';
 import { useSkills } from '@/hooks/useSkills';
+import { useState, useEffect } from 'react';
+
+interface AboutData {
+  name: string;
+  role: string;
+  bio: string;
+  experience: string;
+  location: string;
+  email: string;
+  education: string;
+  
+}
 
 export default function About() {
-  const { about } = projectsData;
-  const { skills, isLoading, error, skillCategories, getSkillsByCategory } = useSkills();
+  const [about, setAbout] = useState<AboutData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const { skills, isLoading: skillsLoading, error: skillsError, skillCategories, getSkillsByCategory } = useSkills();
+
+  useEffect(() => {
+    const fetchAbout = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/api/about/');
+        if (!response.ok) {
+          throw new Error('Failed to fetch about data');
+        }
+        const data = await response.json();
+        console.log(data?.data[0]);
+        setAbout(data.data[0]);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchAbout();
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -69,6 +103,22 @@ export default function About() {
     };
     return iconMap[skill] || <Code2 />;
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (error || !about) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-red-500">Error: {error || 'Failed to load data'}</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
@@ -190,7 +240,7 @@ export default function About() {
               <GraduationCap className="w-6 h-6 text-white" />
             </motion.div>
             <h3 className="text-lg font-semibold mb-2">Education</h3>
-            <p className="text-gray-600">{about.education[0].degree}</p>
+            <p className="text-gray-600">{about.education}</p>
           </motion.div>
         </motion.div>
 
@@ -241,40 +291,6 @@ export default function About() {
                     </motion.div>
                   ))}
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Interests Section */}
-        <motion.div
-          variants={itemVariants}
-          initial="hidden"
-          animate="visible"
-          className="bg-white/95 backdrop-blur-sm p-8 rounded-xl shadow-lg"
-        >
-          <h2 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
-            Interests & Hobbies
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {about.interests.map((interest, index) => (
-              <motion.div
-                key={interest}
-                whileHover={{ scale: 1.05 }}
-                className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-primary/5 to-blue-600/5 hover:from-primary/10 hover:to-blue-600/10 transition-all"
-              >
-                <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                  index === 0 ? 'bg-gradient-to-r from-blue-500 to-purple-500' :
-                  index === 1 ? 'bg-gradient-to-r from-green-500 to-teal-500' :
-                  index === 2 ? 'bg-gradient-to-r from-yellow-500 to-orange-500' :
-                  'bg-gradient-to-r from-pink-500 to-rose-500'
-                }`}>
-                  {index === 0 ? <Code2 className="w-5 h-5 text-white" /> :
-                   index === 1 ? <Palette className="w-5 h-5 text-white" /> :
-                   index === 2 ? <Workflow className="w-5 h-5 text-white" /> :
-                   <GitPullRequest className="w-5 h-5 text-white" />}
-                </div>
-                <span className="font-medium">{interest}</span>
               </motion.div>
             ))}
           </div>
