@@ -1,11 +1,19 @@
 "use client";
 
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { motion } from "framer-motion";
+import { Code2, Server, Database, Package } from "lucide-react";
+import { useSkills } from "@/hooks/useSkills";
 
 interface Skill {
   id: string;
   name: string;
+  category: "FRONTEND" | "BACKEND" | "DATABASE" | "TOOLS";
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface ApiResponse {
+  data: Skill[];
 }
 
 interface SkillCategory {
@@ -14,57 +22,67 @@ interface SkillCategory {
   description: string;
   color: string;
   bgColor: string;
-  skills: Skill[];
+  category: "FRONTEND" | "BACKEND" | "DATABASE" | "TOOLS";
 }
 
-interface SkillsData {
-  skillCategories: SkillCategory[];
-}
+const skillCategories: SkillCategory[] = [
+  {
+    id: "frontend",
+    title: "Frontend Development",
+    description: "Building modern and responsive user interfaces",
+    color: "text-blue-600",
+    bgColor: "bg-blue-50",
+    category: "FRONTEND",
+  },
+  {
+    id: "backend",
+    title: "Backend Development",
+    description: "Creating robust and scalable server-side applications",
+    color: "text-green-600",
+    bgColor: "bg-green-50",
+    category: "BACKEND",
+  },
+  {
+    id: "database",
+    title: "Database & Storage",
+    description: "Expertise in database management and data storage solutions",
+    color: "text-purple-600",
+    bgColor: "bg-purple-50",
+    category: "DATABASE",
+  },
+  {
+    id: "tools",
+    title: "Tools & Technologies",
+    description: "Essential tools and technologies for development",
+    color: "text-orange-600",
+    bgColor: "bg-orange-50",
+    category: "TOOLS",
+  },
+];
 
 const skillVariants = {
   initial: { opacity: 0, y: 20 },
-  animate: { 
-    opacity: 1, 
+  animate: {
+    opacity: 1,
     y: 0,
     transition: {
       duration: 0.5,
-      ease: "easeOut"
-    }
-  }
+      ease: "easeOut",
+    },
+  },
 };
 
 export default function Skills() {
-  const [skillCategories, setSkillCategories] = useState<SkillCategory[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchSkills = async () => {
-      try {
-        const response = await fetch('/data/homePageSkills.json');
-        if (!response.ok) {
-          throw new Error('Failed to fetch skills data');
-        }
-        const data: SkillsData = await response.json();
-        setSkillCategories(data.skillCategories);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred while fetching skills');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchSkills();
-  }, []);
+  const { skills, isLoading, error, skillCategories, getSkillsByCategory } = useSkills();
 
   if (isLoading) {
     return (
       <section className="py-20 bg-gradient-to-b from-white to-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="animate-pulse">
-              <div className="h-8 bg-gray-200 rounded w-48 mx-auto mb-4"></div>
-              <div className="h-4 bg-gray-200 rounded w-64 mx-auto"></div>
+              <div className="w-48 h-8 mx-auto mb-4 bg-gray-200 rounded"></div>
+              <div className="w-64 h-4 mx-auto bg-gray-200 rounded"></div>
             </div>
           </div>
         </div>
@@ -75,7 +93,7 @@ export default function Skills() {
   if (error) {
     return (
       <section className="py-20 bg-gradient-to-b from-white to-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="text-center text-red-500">
             <p>Error: {error}</p>
           </div>
@@ -86,50 +104,48 @@ export default function Skills() {
 
   return (
     <section className="py-20 bg-gradient-to-b from-white to-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">My Skills</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Technologies I work with to build amazing digital experiences
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
+            Technical Skills
+          </h2>
+          <p className="mt-4 text-lg text-gray-600">
+            A comprehensive overview of my technical expertise
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {skillCategories.map((category, index) => (
-            <motion.div 
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {skillCategories.map((category) => (
+            <motion.div
               key={category.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group"
+              variants={skillVariants}
+              initial="initial"
+              animate="animate"
+              className={`${category.bgColor} p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow`}
             >
-              <div className="mb-6">
-                <h3 className="text-2xl font-semibold text-gray-800 group-hover:text-primary transition-colors duration-300">
-                  {category.title}
-                </h3>
-                <p className="text-gray-600 text-sm mt-1">{category.description}</p>
+              <div
+                className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${
+                  category.id === 'frontend' ? 'bg-gradient-to-r from-blue-500 to-purple-500' :
+                  category.id === 'backend' ? 'bg-gradient-to-r from-green-500 to-teal-500' :
+                  category.id === 'database' ? 'bg-gradient-to-r from-purple-500 to-pink-500' :
+                  'bg-gradient-to-r from-orange-500 to-red-500'
+                }`}
+              >
+                {category.id === 'frontend' ? <Code2 className="w-6 h-6 text-white" /> :
+                 category.id === 'backend' ? <Server className="w-6 h-6 text-white" /> :
+                 category.id === 'database' ? <Database className="w-6 h-6 text-white" /> :
+                 <Package className="w-6 h-6 text-white" />}
               </div>
-              
-              <div className="space-y-3">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.div 
+              <h3 className={`text-xl font-semibold mb-2 ${category.color}`}>{category.title}</h3>
+              <p className="text-gray-600 mb-4">{category.description}</p>
+              <div className="grid grid-cols-2 gap-3">
+                {getSkillsByCategory(category.id).map((skill) => (
+                  <motion.div
                     key={skill.id}
-                    variants={skillVariants}
-                    initial="initial"
-                    animate="animate"
-                    transition={{ delay: skillIndex * 0.1 }}
-                    whileHover={{ scale: 1.02 }}
-                    className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors duration-300 group/skill"
+                    whileHover={{ scale: 1.05 }}
+                    className="flex items-center gap-2 p-2 rounded-lg bg-white/80 hover:bg-white transition-colors"
                   >
-                    <span className="w-2 h-2 rounded-full bg-gray-400"></span>
-                    <span className="font-medium text-gray-700 group-hover/skill:text-primary transition-colors duration-300">
-                      {skill.name}
-                    </span>
+                    <span className="text-sm font-medium">{skill.name}</span>
                   </motion.div>
                 ))}
               </div>

@@ -9,9 +9,11 @@ import {
 } from 'lucide-react';
 import projectsData from '@/data/projects.json';
 import Image from 'next/image';
+import { useSkills } from '@/hooks/useSkills';
 
 export default function About() {
   const { about } = projectsData;
+  const { skills, isLoading, error, skillCategories, getSkillsByCategory } = useSkills();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -199,39 +201,43 @@ export default function About() {
           animate="visible"
           className="mb-16"
         >
-          <h2 className="text-3xl font-bold mb-8 text-center ">
+          <h2 className="text-3xl font-bold mb-8 text-center">
             Technical Skills
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {about.skills.map((skillGroup, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {skillCategories.map((category) => (
               <motion.div
-                key={skillGroup.category}
+                key={category.id}
                 variants={itemVariants}
-                className="bg-white/95 backdrop-blur-sm p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
+                className={`${category.bgColor} p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow`}
               >
                 <motion.div
                   variants={iconVariants}
                   initial="initial"
                   whileHover="hover"
                   className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${
-                    index === 0 ? 'bg-gradient-to-r from-blue-500 to-purple-500' :
-                    index === 1 ? 'bg-gradient-to-r from-green-500 to-teal-500' :
-                    'bg-gradient-to-r from-yellow-500 to-orange-500'
+                    category.id === 'frontend' ? 'bg-gradient-to-r from-blue-500 to-purple-500' :
+                    category.id === 'backend' ? 'bg-gradient-to-r from-green-500 to-teal-500' :
+                    category.id === 'database' ? 'bg-gradient-to-r from-purple-500 to-pink-500' :
+                    'bg-gradient-to-r from-orange-500 to-red-500'
                   }`}
                 >
-                  {index === 0 ? <Code2 className="w-6 h-6 text-white" /> :
-                   index === 1 ? <Server className="w-6 h-6 text-white" /> :
-                   <Database className="w-6 h-6 text-white" />}
+                  {category.id === 'frontend' ? <Code2 className="w-6 h-6 text-white" /> :
+                   category.id === 'backend' ? <Server className="w-6 h-6 text-white" /> :
+                   category.id === 'database' ? <Database className="w-6 h-6 text-white" /> :
+                   <Package className="w-6 h-6 text-white" />}
                 </motion.div>
-                <h3 className="text-xl font-semibold mb-6">{skillGroup.category}</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  {skillGroup.items.map((skill) => (
+                <h3 className={`text-xl font-semibold mb-2 ${category.color}`}>{category.title}</h3>
+                <p className="text-gray-600 mb-4">{category.description}</p>
+                <div className="grid grid-cols-2 gap-3">
+                  {getSkillsByCategory(category.id).map((skill) => (
                     <motion.div
-                      key={skill}
+                      key={skill.id}
                       whileHover={{ scale: 1.05 }}
-                      className="flex items-center gap-2 p-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
+                      className="flex items-center gap-2 p-2 rounded-lg bg-white/80 hover:bg-white transition-colors"
                     >
-                      <span className="text-sm font-medium">{skill}</span>
+                      {getSkillIcon(skill.name)}
+                      <span className="text-sm font-medium">{skill.name}</span>
                     </motion.div>
                   ))}
                 </div>
