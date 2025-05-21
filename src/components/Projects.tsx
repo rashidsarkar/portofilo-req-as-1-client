@@ -87,13 +87,15 @@ export default function Projects() {
               variants={itemVariants}
               className="overflow-hidden transition-shadow bg-white rounded-lg shadow-md hover:shadow-xl"
             >
-              <img
-                src={project.image}
-                alt={project.title}
-                width={400}
-                height={300}
-                className="object-cover w-full h-48"
-              />
+              <div className="relative w-full h-48">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </div>
               <div className="p-6">
                 <h2 className="mb-2 text-xl font-semibold">{project.title}</h2>
                 <p className="mb-4 text-gray-600">{project.overview}</p>

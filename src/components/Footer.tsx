@@ -1,28 +1,10 @@
 "use client";
 
 import Link from 'next/link';
-import { Github, Mail, Linkedin, Twitter, MapPin, Phone, ArrowUpRight, ExternalLink } from 'lucide-react';
+import { Github, Linkedin, ArrowUpRight } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-
-  const socialLinks = [
-    {
-      name: 'GitHub',
-      href: 'https://github.com/rashidsarkar',
-      icon: Github,
-    },
-    {
-      name: 'LinkedIn',
-      href: '#',
-      icon: Linkedin,
-    },
-    {
-      name: 'Twitter',
-      href: '#',
-      icon: Twitter,
-    },
-  ];
 
   return (
     <footer className="bg-white border-t border-gray-100">

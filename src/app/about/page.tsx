@@ -2,12 +2,10 @@
 
 import { motion } from 'framer-motion';
 import { 
-  Code2, Database, Server, Users, GraduationCap, MapPin, Mail, 
+  Code2, Database, Server, GraduationCap, MapPin, Mail, 
   Briefcase, Globe, Terminal, Palette, GitBranch, Monitor, 
-  Smartphone, Layers, Zap, Shield, Cpu, FileCode, 
-  Layout, Package, GitPullRequest, Workflow, Boxes
+  Layers, Zap, Cpu, FileCode, Layout, Package, Boxes
 } from 'lucide-react';
-import projectsData from '@/data/projects.json';
 import Image from 'next/image';
 import { useSkills } from '@/hooks/useSkills';
 import { useState, useEffect } from 'react';
@@ -27,7 +25,7 @@ export default function About() {
   const [about, setAbout] = useState<AboutData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { skills, isLoading: skillsLoading, error: skillsError, skillCategories, getSkillsByCategory } = useSkills();
+  const { skillCategories, getSkillsByCategory } = useSkills();
 
   useEffect(() => {
     const fetchAbout = async () => {
@@ -84,7 +82,7 @@ export default function About() {
   };
 
   const getSkillIcon = (skill: string) => {
-    const iconMap: { [key: string]: any } = {
+    const iconMap: { [key: string]: React.ReactNode } = {
       'React.js': <Code2 />,
       'Next.js': <Layers />,
       'TypeScript': <FileCode />,

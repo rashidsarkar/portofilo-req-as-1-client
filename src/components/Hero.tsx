@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from './ui/button';
-import { ExternalLink, Mail, Code2, ArrowRight, Github, Linkedin, Twitter } from 'lucide-react';
+import { ExternalLink, Mail, Code2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function Hero() {
@@ -11,7 +11,7 @@ export default function Hero() {
     <section className="flex flex-col md:flex-row items-center justify-between gap-8 py-16">
       <div className="flex-1 space-y-6">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
-          Hi, I'm MD Rashid Sarkar
+          Hi, I&apos;m MD Rashid Sarkar
         </h1>
         <h2 className="text-2xl md:text-3xl text-primary flex items-center gap-2">
           <Code2 className="w-8 h-8" />

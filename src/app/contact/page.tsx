@@ -29,7 +29,7 @@ export default function Contact() {
             <h2 className="text-3xl font-semibold mb-4 text-gray-800">Get in Touch</h2>
             <p className="text-gray-600 text-lg">
               Feel free to reach out to me for any questions or opportunities.
-              I'll get back to you as soon as possible.
+              I&apos;ll get back to you as soon as possible.
             </p>
           </div>
           

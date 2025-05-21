@@ -71,10 +71,12 @@ console.log(project);
 
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="relative h-[400px]">
-          <img
+          <Image
             src={project.image}
             alt={project.title}
+            fill
             className="object-cover w-full h-full"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
 

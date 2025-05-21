@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '../../../components/ui/button';
+import Image from 'next/image';
 
 interface BlogPost {
   id: number;
@@ -61,10 +62,12 @@ export default function BlogPost() {
       <div className="container mx-auto px-4 py-16">
         <article className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
           <div className="relative h-96 w-full">
-            <img
+            <Image
               src={post.image}
               alt={post.title}
+              fill
               className="w-full h-full object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
 

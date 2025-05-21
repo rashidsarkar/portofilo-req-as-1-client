@@ -4,62 +4,6 @@ import { motion } from "framer-motion";
 import { Code2, Server, Database, Package } from "lucide-react";
 import { useSkills } from "@/hooks/useSkills";
 
-interface Skill {
-  id: string;
-  name: string;
-  category: "FRONTEND" | "BACKEND" | "DATABASE" | "TOOLS";
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface ApiResponse {
-  data: Skill[];
-}
-
-interface SkillCategory {
-  id: string;
-  title: string;
-  description: string;
-  color: string;
-  bgColor: string;
-  category: "FRONTEND" | "BACKEND" | "DATABASE" | "TOOLS";
-}
-
-const skillCategories: SkillCategory[] = [
-  {
-    id: "frontend",
-    title: "Frontend Development",
-    description: "Building modern and responsive user interfaces",
-    color: "text-blue-600",
-    bgColor: "bg-blue-50",
-    category: "FRONTEND",
-  },
-  {
-    id: "backend",
-    title: "Backend Development",
-    description: "Creating robust and scalable server-side applications",
-    color: "text-green-600",
-    bgColor: "bg-green-50",
-    category: "BACKEND",
-  },
-  {
-    id: "database",
-    title: "Database & Storage",
-    description: "Expertise in database management and data storage solutions",
-    color: "text-purple-600",
-    bgColor: "bg-purple-50",
-    category: "DATABASE",
-  },
-  {
-    id: "tools",
-    title: "Tools & Technologies",
-    description: "Essential tools and technologies for development",
-    color: "text-orange-600",
-    bgColor: "bg-orange-50",
-    category: "TOOLS",
-  },
-];
-
 const skillVariants = {
   initial: { opacity: 0, y: 20 },
   animate: {
@@ -73,7 +17,7 @@ const skillVariants = {
 };
 
 export default function Skills() {
-  const { skills, isLoading, error, skillCategories, getSkillsByCategory } = useSkills();
+  const { isLoading, error, skillCategories, getSkillsByCategory } = useSkills();
 
   if (isLoading) {
     return (

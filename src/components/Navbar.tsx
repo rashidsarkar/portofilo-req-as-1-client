@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from './ui/button';
-import { Github, Mail, Download, Menu, X, Home, FolderGit2, BookOpen, Phone, User } from 'lucide-react';
+import { Github, Download, Menu, X, Home, FolderGit2, BookOpen, Phone, User } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '../lib/utils';
 

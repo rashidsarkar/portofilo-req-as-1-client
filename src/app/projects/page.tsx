@@ -53,10 +53,12 @@ export default function ProjectsPage() {
               className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
             >
               <div className="relative h-48 w-full">
-                <img
+                <Image
                   src={project.image}
                   alt={project.title}
-                  className="object-cover w-full h-full"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
               <div className="p-6">

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Button } from "../../components/ui/button";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface BlogPost {
   id: number;
@@ -51,10 +52,12 @@ export default function Blog() {
               className="overflow-hidden bg-white shadow-lg rounded-xl"
             >
               <div className="relative w-full h-48">
-                <img
+                <Image
                   src={post.image}
                   alt={post.title}
-                  className="object-cover w-full h-full"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
 
