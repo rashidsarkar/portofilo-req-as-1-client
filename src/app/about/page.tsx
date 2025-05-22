@@ -1,14 +1,30 @@
 "use client";
 
-import { motion } from 'framer-motion';
-import { 
-  Code2, Database, Server, GraduationCap, MapPin, Mail, 
-  Briefcase, Globe, Terminal, Palette, GitBranch, Monitor, 
-  Layers, Zap, Cpu, FileCode, Layout, Package, Boxes
-} from 'lucide-react';
-import Image from 'next/image';
-import { useSkills } from '@/hooks/useSkills';
-import { useState, useEffect } from 'react';
+import { motion } from "framer-motion";
+import {
+  Code2,
+  Database,
+  Server,
+  GraduationCap,
+  MapPin,
+  Mail,
+  Briefcase,
+  Globe,
+  Terminal,
+  Palette,
+  GitBranch,
+  Monitor,
+  Layers,
+  Zap,
+  Cpu,
+  FileCode,
+  Layout,
+  Package,
+  Boxes,
+} from "lucide-react";
+import Image from "next/image";
+import { useSkills } from "@/hooks/useSkills";
+import { useState, useEffect } from "react";
 
 interface AboutData {
   name: string;
@@ -18,7 +34,6 @@ interface AboutData {
   location: string;
   email: string;
   education: string;
-  
 }
 
 export default function About() {
@@ -30,15 +45,17 @@ export default function About() {
   useEffect(() => {
     const fetchAbout = async () => {
       try {
-        const response = await fetch('http://localhost:4000/api/about/');
+        const response = await fetch(
+          "https://server-dashbord.vercel.app/api/about/"
+        );
         if (!response.ok) {
-          throw new Error('Failed to fetch about data');
+          throw new Error("Failed to fetch about data");
         }
         const data = await response.json();
         console.log(data?.data[0]);
         setAbout(data.data[0]);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred');
+        setError(err instanceof Error ? err.message : "An error occurred");
       } finally {
         setIsLoading(false);
       }
@@ -52,9 +69,9 @@ export default function About() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
@@ -64,40 +81,40 @@ export default function About() {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
-      }
-    }
+        ease: "easeOut",
+      },
+    },
   };
 
   const iconVariants = {
     initial: { scale: 1 },
-    hover: { 
+    hover: {
       scale: 1.2,
       rotate: 360,
       transition: {
         duration: 0.5,
-        ease: "easeInOut"
-      }
-    }
+        ease: "easeInOut",
+      },
+    },
   };
 
   const getSkillIcon = (skill: string) => {
     const iconMap: { [key: string]: React.ReactNode } = {
-      'React.js': <Code2 />,
-      'Next.js': <Layers />,
-      'TypeScript': <FileCode />,
-      'Tailwind CSS': <Palette />,
-      'Redux': <Boxes />,
-      'Node.js': <Terminal />,
-      'Express.js': <Server />,
-      'MongoDB': <Database />,
-      'Firebase': <Zap />,
-      'REST APIs': <Globe />,
-      'Git': <GitBranch />,
-      'VS Code': <Monitor />,
-      'Figma': <Layout />,
-      'Postman': <Package />,
-      'Docker': <Cpu />
+      "React.js": <Code2 />,
+      "Next.js": <Layers />,
+      TypeScript: <FileCode />,
+      "Tailwind CSS": <Palette />,
+      Redux: <Boxes />,
+      "Node.js": <Terminal />,
+      "Express.js": <Server />,
+      MongoDB: <Database />,
+      Firebase: <Zap />,
+      "REST APIs": <Globe />,
+      Git: <GitBranch />,
+      "VS Code": <Monitor />,
+      Figma: <Layout />,
+      Postman: <Package />,
+      Docker: <Cpu />,
     };
     return iconMap[skill] || <Code2 />;
   };
@@ -113,7 +130,9 @@ export default function About() {
   if (error || !about) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-red-500">Error: {error || 'Failed to load data'}</div>
+        <div className="text-red-500">
+          Error: {error || "Failed to load data"}
+        </div>
       </div>
     );
   }
@@ -158,13 +177,9 @@ export default function About() {
                 />
               </div>
             </motion.div>
-            <h1 className="text-5xl font-bold mb-4 text-white">
-              {about.name}
-            </h1>
+            <h1 className="text-5xl font-bold mb-4 text-white">{about.name}</h1>
             <p className="text-xl text-white/90 mb-4">{about.role}</p>
-            <p className="text-white/90 max-w-2xl mx-auto">
-              {about.bio}
-            </p>
+            <p className="text-white/90 max-w-2xl mx-auto">{about.bio}</p>
           </motion.div>
         </div>
       </div>
@@ -264,18 +279,28 @@ export default function About() {
                   initial="initial"
                   whileHover="hover"
                   className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${
-                    category.id === 'frontend' ? 'bg-gradient-to-r from-blue-500 to-purple-500' :
-                    category.id === 'backend' ? 'bg-gradient-to-r from-green-500 to-teal-500' :
-                    category.id === 'database' ? 'bg-gradient-to-r from-purple-500 to-pink-500' :
-                    'bg-gradient-to-r from-orange-500 to-red-500'
+                    category.id === "frontend"
+                      ? "bg-gradient-to-r from-blue-500 to-purple-500"
+                      : category.id === "backend"
+                      ? "bg-gradient-to-r from-green-500 to-teal-500"
+                      : category.id === "database"
+                      ? "bg-gradient-to-r from-purple-500 to-pink-500"
+                      : "bg-gradient-to-r from-orange-500 to-red-500"
                   }`}
                 >
-                  {category.id === 'frontend' ? <Code2 className="w-6 h-6 text-white" /> :
-                   category.id === 'backend' ? <Server className="w-6 h-6 text-white" /> :
-                   category.id === 'database' ? <Database className="w-6 h-6 text-white" /> :
-                   <Package className="w-6 h-6 text-white" />}
+                  {category.id === "frontend" ? (
+                    <Code2 className="w-6 h-6 text-white" />
+                  ) : category.id === "backend" ? (
+                    <Server className="w-6 h-6 text-white" />
+                  ) : category.id === "database" ? (
+                    <Database className="w-6 h-6 text-white" />
+                  ) : (
+                    <Package className="w-6 h-6 text-white" />
+                  )}
                 </motion.div>
-                <h3 className={`text-xl font-semibold mb-2 ${category.color}`}>{category.title}</h3>
+                <h3 className={`text-xl font-semibold mb-2 ${category.color}`}>
+                  {category.title}
+                </h3>
                 <p className="text-gray-600 mb-4">{category.description}</p>
                 <div className="grid grid-cols-2 gap-3">
                   {getSkillsByCategory(category.id).map((skill) => (
@@ -296,4 +321,4 @@ export default function About() {
       </div>
     </div>
   );
-} 
+}

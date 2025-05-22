@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface Skill {
   id: string;
@@ -64,7 +64,9 @@ export const useSkills = () => {
   useEffect(() => {
     const fetchSkills = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/skill");
+        const response = await fetch(
+          "https://server-dashbord.vercel.app/api/skill"
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch skills data");
         }
@@ -85,7 +87,9 @@ export const useSkills = () => {
   }, []);
 
   const getSkillsByCategory = (category: string) => {
-    return skills.filter(skill => skill.category.toLowerCase() === category.toLowerCase());
+    return skills.filter(
+      (skill) => skill.category.toLowerCase() === category.toLowerCase()
+    );
   };
 
   return {
@@ -93,6 +97,6 @@ export const useSkills = () => {
     isLoading,
     error,
     skillCategories,
-    getSkillsByCategory
+    getSkillsByCategory,
   };
-}; 
+};

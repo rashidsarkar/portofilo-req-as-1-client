@@ -19,7 +19,9 @@ export default function Blog() {
   useEffect(() => {
     const fetchBlogPosts = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/blog");
+        const response = await fetch(
+          "https://server-dashbord.vercel.app/api/blog"
+        );
         const data = await response.json();
         setBlogPosts(data.data); // The JSON is already an array, no need for .posts
       } catch (error) {
@@ -44,7 +46,7 @@ export default function Blog() {
         </div>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {blogPosts.map((post: BlogPost, index: number) => (
+          {blogPosts?.map((post: BlogPost, index: number) => (
             <article
               key={post.id}
               data-aos="fade-up"

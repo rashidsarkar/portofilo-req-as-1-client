@@ -1,10 +1,10 @@
 "use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, Info } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Info } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface Project {
   id: string;
@@ -23,11 +23,13 @@ export default function ProjectsPage() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch('http://localhost:4000/api/project');
+        const response = await fetch(
+          "https://server-dashbord.vercel.app/api/project"
+        );
         const data = await response.json();
         setProjects(data.data);
       } catch (error) {
-        console.error('Error fetching projects:', error);
+        console.error("Error fetching projects:", error);
       }
     };
 
@@ -38,11 +40,10 @@ export default function ProjectsPage() {
     <div className="min-h-screen py-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">
-            My Projects
-          </h1>
+          <h1 className="text-4xl font-bold mb-4">My Projects</h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Explore my portfolio of projects showcasing my skills and experience in web development.
+            Explore my portfolio of projects showcasing my skills and experience
+            in web development.
           </p>
         </div>
 
@@ -71,7 +72,7 @@ export default function ProjectsPage() {
                     {[
                       ...project.frontendTech,
                       ...project.backendTech,
-                      project.databaseTech
+                      project.databaseTech,
                     ].map((tech, index) => (
                       <span
                         key={`${tech}-${index}`}
@@ -111,4 +112,4 @@ export default function ProjectsPage() {
       </div>
     </div>
   );
-} 
+}

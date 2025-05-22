@@ -1,11 +1,18 @@
 "use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { ExternalLink, ArrowLeft, Code2, Database, Server, Github } from 'lucide-react';
-import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import {
+  ExternalLink,
+  ArrowLeft,
+  Code2,
+  Database,
+  Server,
+  Github,
+} from "lucide-react";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface Project {
   id: string;
@@ -28,11 +35,13 @@ export default function ProjectDetails() {
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/api/project/${params.id}`);
+        const response = await fetch(
+          `https://server-dashbord.vercel.app/api/project/${params.id}`
+        );
         const data = await response.json();
         setProject(data.data);
       } catch (error) {
-        console.error('Error fetching project:', error);
+        console.error("Error fetching project:", error);
       } finally {
         setLoading(false);
       }
@@ -40,7 +49,7 @@ export default function ProjectDetails() {
 
     fetchProject();
   }, [params.id]);
-console.log(project);
+  console.log(project);
   if (loading) {
     return (
       <div className="container mx-auto px-4 py-16">
@@ -82,13 +91,11 @@ console.log(project);
 
         <div className="p-8">
           <h1 className="text-4xl font-bold mb-4">{project.title}</h1>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             <div>
               <h2 className="text-2xl font-semibold mb-4">Project Overview</h2>
-              <p className="text-gray-600 mb-6">
-                {project.overview}
-              </p>
+              <p className="text-gray-600 mb-6">{project.overview}</p>
 
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
@@ -96,14 +103,18 @@ console.log(project);
                     <Code2 className="w-5 h-5 text-white" />
                   </div>
                   <span className="font-medium">Frontend Technologies:</span>
-                  <span className="text-gray-600">{project.frontendTech.join(', ')}</span>
+                  <span className="text-gray-600">
+                    {project.frontendTech.join(", ")}
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="p-2 rounded-lg bg-gradient-to-r from-green-500 to-teal-500">
                     <Server className="w-5 h-5 text-white" />
                   </div>
                   <span className="font-medium">Backend Technologies:</span>
-                  <span className="text-gray-600">{project.backendTech.join(', ')}</span>
+                  <span className="text-gray-600">
+                    {project.backendTech.join(", ")}
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="p-2 rounded-lg bg-gradient-to-r from-yellow-500 to-orange-500">
@@ -118,41 +129,41 @@ console.log(project);
             <div>
               <h2 className="text-2xl font-semibold mb-4">Project Links</h2>
               <div className="space-y-4">
-              <div className="space-y-4">
-                <a
-                  href={project.liveDemoLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-primary hover:underline group"
-                >
-                  <div className="p-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:scale-110 transition-transform">
-                    <ExternalLink className="w-5 h-5 text-white" />
-                  </div>
-                  <span>Live Demo</span>
-                </a>
-                <a
-                  href={project.clientRepoLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-primary hover:underline group"
-                >
-                  <div className="p-2 rounded-lg bg-gradient-to-r from-gray-800 to-gray-900 group-hover:scale-110 transition-transform">
-                    <Github className="w-5 h-5 text-white" />
-                  </div>
-                  <span>Client Repository</span>
-                </a>
-                <a
-                  href={project.serverRepoLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-primary hover:underline group"
-                >
-                  <div className="p-2 rounded-lg bg-gradient-to-r from-gray-800 to-gray-900 group-hover:scale-110 transition-transform">
-                    <Github className="w-5 h-5 text-white" />
-                  </div>
-                  <span>Server Repository</span>
-                </a>
-              </div>
+                <div className="space-y-4">
+                  <a
+                    href={project.liveDemoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-primary hover:underline group"
+                  >
+                    <div className="p-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:scale-110 transition-transform">
+                      <ExternalLink className="w-5 h-5 text-white" />
+                    </div>
+                    <span>Live Demo</span>
+                  </a>
+                  <a
+                    href={project.clientRepoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-primary hover:underline group"
+                  >
+                    <div className="p-2 rounded-lg bg-gradient-to-r from-gray-800 to-gray-900 group-hover:scale-110 transition-transform">
+                      <Github className="w-5 h-5 text-white" />
+                    </div>
+                    <span>Client Repository</span>
+                  </a>
+                  <a
+                    href={project.serverRepoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-primary hover:underline group"
+                  >
+                    <div className="p-2 rounded-lg bg-gradient-to-r from-gray-800 to-gray-900 group-hover:scale-110 transition-transform">
+                      <Github className="w-5 h-5 text-white" />
+                    </div>
+                    <span>Server Repository</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -160,4 +171,4 @@ console.log(project);
       </div>
     </div>
   );
-} 
+}

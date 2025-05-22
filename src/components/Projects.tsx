@@ -15,7 +15,7 @@ interface Project {
   frontendTech: string[];
   backendTech: string[];
   databaseTech: string;
-  
+
   liveDemoLink: string;
 }
 
@@ -25,11 +25,13 @@ export default function Projects() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch('http://localhost:4000/api/project');
+        const response = await fetch(
+          "https://server-dashbord.vercel.app/api/project"
+        );
         const data = await response.json();
         setProjects(data.data);
       } catch (error) {
-        console.error('Error fetching projects:', error);
+        console.error("Error fetching projects:", error);
       }
     };
 
@@ -119,7 +121,6 @@ export default function Projects() {
                 </div>
 
                 <div className="flex flex-wrap items-center justify-between gap-3">
-                  
                   <div className="flex gap-3">
                     {project.liveDemoLink && (
                       <motion.a

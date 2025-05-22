@@ -5,9 +5,9 @@ const nextConfig: NextConfig = {
     domains: [
       "fabulous-meringue-442652.netlify.app",
       "i.ibb.co",
-      
-    ]
-  }
+      "images.unsplash.com",
+    ],
+  },
 };
 
 export default nextConfig;
