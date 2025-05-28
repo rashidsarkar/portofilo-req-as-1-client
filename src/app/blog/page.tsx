@@ -6,15 +6,18 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 interface BlogPost {
-  id: number;
+  id: string;
   title: string;
   image: string;
   excerpt: string;
   content: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export default function Blog() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchBlogPosts = async () => {
@@ -23,15 +26,30 @@ export default function Blog() {
           "https://server-dashbord.vercel.app/api/blog"
         );
         const data = await response.json();
-        setBlogPosts(data.data); // The JSON is already an array, no need for .posts
+        if (data.success) {
+          setBlogPosts(data.data);
+        } else {
+          setBlogPosts([]);
+        }
       } catch (error) {
         console.error("Error fetching blog posts:", error);
+        setBlogPosts([]);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchBlogPosts();
   }, []);
-  // console.log(blogPosts.data);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="w-12 h-12 border-t-2 border-b-2 rounded-full animate-spin border-primary"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       <div className="container px-4 py-16 mx-auto">
@@ -45,7 +63,7 @@ export default function Blog() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {blogPosts?.map((post: BlogPost, index: number) => (
             <article
               key={post.id}

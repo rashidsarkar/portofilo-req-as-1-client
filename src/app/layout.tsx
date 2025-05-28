@@ -5,6 +5,7 @@ import { ThemeProvider } from "../components/theme-provider";
 import { AOSProvider } from "../components/aos-provider";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,12 +32,11 @@ export default function RootLayout({
             <div className="min-h-screen flex flex-col">
               <Navbar />
               <div className="flex-grow">
-                <div className="container mx-auto px-4 py-8">
-                  {children}
-                </div>
+                <div className="container mx-auto px-4 py-8">{children}</div>
               </div>
               <Footer />
             </div>
+            <Toaster richColors position="top-right" />
           </AOSProvider>
         </ThemeProvider>
       </body>
